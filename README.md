@@ -1,5 +1,5 @@
 # infra-monitoring
-This to setup infra monitoring tools, such as Grafana, Prometheus and Opentelemetry
+This is to setup infra monitoring tools, such as Grafana, Prometheus and Opentelemetry etc.
 ------------------------------------------------------------------------------------------
 
 This command adds the official Grafana stable repository to your package manager
