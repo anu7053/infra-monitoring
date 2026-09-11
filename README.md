@@ -148,3 +148,8 @@ Uninstall InfluxDB
 # • sudo yum remove -y 
 telegraf
 
+## How to reset Grafana password
+
+# sudo grafana-cli --homepath "/usr/share/grafana" --config "/etc/grafana/grafana.ini" admin reset-admin-password Meest@123456
+
+
