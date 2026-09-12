@@ -1,0 +1,37 @@
+## prometheus workflow 
+
+name: Prometheus Setup and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  prometheus-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step A: Download your repository files into the runner
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step B: Spin up Prometheus using Docker
+      - name: Run Prometheus Container
+        run: |
+          docker run -d \
+            --name prometheus \
+            -p 9090:9090 \
+            -v ${{ github.workspace }}/prometheus.yml:/etc/prometheus/prometheus.yml \
+            prom/prometheus:latest
+
+      # Step C: Let the container spin up completely
+      - name: Wait for Prometheus to start
+        run: sleep 5
+
+      # Step D: Check if the application is healthy
+      - name: Test Prometheus Health Endpoint
+        run: |
+          curl -s -f http://localhost:9090/-/healthy
+          echo "Prometheus is successfully installed and running!"
